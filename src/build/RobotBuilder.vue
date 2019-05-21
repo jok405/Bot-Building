@@ -62,36 +62,57 @@ export default {
   },
   methods: {
     selectNextHead() {
-      this.selectedHeadIndex = getNextValidIndex(this.selectedHeadIndex, availableParts.heads.length);
+      this.selectedHeadIndex = getNextValidIndex(
+        this.selectedHeadIndex,
+        availableParts.heads.length,
+      );
       // this.selectedHeadIndex += 1;
       // console.log('selectNextHead called');
     },
     selectPreviousHead() {
-      this.selectedHeadIndex = getPreviousValidIndex(this.selectedHeadIndex, availableParts.heads.length);
+      this.selectedHeadIndex = getPreviousValidIndex(
+        this.selectedHeadIndex, availableParts.heads.length,
+      );
     },
     selectNextLeftArm() {
-      this.selectedLeftArmIndex = getNextValidIndex(this.selectedLeftArmIndex, availableParts.arms.length);
+      this.selectedLeftArmIndex = getNextValidIndex(
+        this.selectedLeftArmIndex, availableParts.arms.length,
+      );
     },
     selectPreviousLeftArm() {
-      this.selectedLeftArmIndex = getPreviousValidIndex(this.selectedLeftArmIndex, availableParts.arms.length);
+      this.selectedLeftArmIndex = getPreviousValidIndex(
+        this.selectedLeftArmIndex, availableParts.arms.length,
+      );
     },
     selectNextTorso() {
-      this.selectedTorsoIndex = getNextValidIndex(this.selectedTorsoIndex, availableParts.torsos.length);
+      this.selectedTorsoIndex = getNextValidIndex(
+        this.selectedTorsoIndex, availableParts.torsos.length,
+      );
     },
     selectPreviousTorso() {
-      this.selectedTorsoIndex = getPreviousValidIndex(this.selectedTorsoIndex, availableParts.torsos.length);
+      this.selectedTorsoIndex = getPreviousValidIndex(
+        this.selectedTorsoIndex, availableParts.torsos.length,
+      );
     },
     selectNextRightArm() {
-      this.selectedRightArmIndex = getNextValidIndex(this.selectedRightArmIndex, availableParts.arms.length);
+      this.selectedRightArmIndex = getNextValidIndex(
+        this.selectedRightArmIndex, availableParts.arms.length,
+      );
     },
     selectPreviousRightArm() {
-      this.selectedRightArmIndex = getPreviousValidIndex(this.selectedRightArmIndex, availableParts.arms.length);
+      this.selectedRightArmIndex = getPreviousValidIndex(
+        this.selectedRightArmIndex, availableParts.arms.length,
+      );
     },
     selectNextBase() {
-      this.selectedBaseIndex = getNextValidIndex(this.selectedBaseIndex, availableParts.bases.length);
+      this.selectedBaseIndex = getNextValidIndex(
+        this.selectedBaseIndex, availableParts.bases.length,
+      );
     },
     selectPreviousBase() {
-      this.selectedBaseIndex = getPreviousValidIndex(this.selectedBaseIndex, availableParts.bases.length);
+      this.selectedBaseIndex = getPreviousValidIndex(
+        this.selectedBaseIndex, availableParts.bases.length,
+      );
     },
   },
 };
