@@ -9,6 +9,7 @@
           </li>
         </ul>
       </nav>
+    </header>
     <main>
     <HomePage/>
     </main>
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue'
+import HomePage from './home/HomePage.vue';
 
 export default {
   name: 'app',
