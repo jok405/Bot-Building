@@ -36,7 +36,7 @@
         <button v-on:click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
     </div>
-    </div>
+    <div>
         <h1>Cart</h1>
         <table>
             <thead>
@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(robot, index ) in cart" :key="index">
+                <tr v-for="(robot, index) in cart" :key="index">
                     <td>{{robot.head.title}}</td>
                     <td class="cost">{{robot.cost}}</td>
                 </tr>
@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     addToCart() {
-      const robot = this.selectedRobot();
+      const robot = this.selectedRobot;
       const cost = robot.head.cost
             + robot.leftArm.cost
             + robot.torso.cost
