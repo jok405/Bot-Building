@@ -2,31 +2,34 @@
   <div>
     <div class="top-row">
       <div class="top part">
-        <img v-bind:src="availableParts.heads[selectedHeadIndex].src" title="head"/>
+          <div class="robot-name">
+              {{selectedRobot.head.title}}
+          </div>
+        <img v-bind:src="selectedRobot.head.src" title="head"/>
         <button v-on:click="selectPreviousHead()" class="prev-selector">&#9668;</button>
         <button v-on:click="selectNextHead()" class="next-selector">&#9658;</button>
       </div>
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img v-bind:src="availableParts.arms[selectedLeftArmIndex].src" title="left arm"/>
+        <img v-bind:src="selectedRobot.leftArm.src" title="left arm"/>
         <button v-on:click="selectPreviousLeftArm()" class="prev-selector">&#9650;</button>
         <button v-on:click="selectNextLeftArm()" class="next-selector">&#9660;</button>
       </div>
       <div class="center part">
-        <img v-bind:src="availableParts.torsos[selectedTorsoIndex].src" title="torso"/>
+        <img v-bind:src="selectedRobot.torso.src" title="torso"/>
         <button v-on:click="selectPreviousTorso()" class="prev-selector">&#9668;</button>
         <button v-on:click="selectNextTorso()" class="next-selector">&#9658;</button>
       </div>
       <div class="right part">
-        <img v-bind:src="availableParts.arms[selectedRightArmIndex].src" title="right arm"/>
+        <img v-bind:src="selectedRobot.rightArm.src" title="right arm"/>
         <button v-on:click="selectPreviousRightArm()" class="prev-selector">&#9650;</button>
         <button v-on:click="selectNextRightArm()" class="next-selector">&#9660;</button>
       </div>
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img v-bind:src="availableParts.bases[selectedBaseIndex].src" title="base"/>
+        <img v-bind:src="selectedRobot.base.src" title="base"/>
         <button v-on:click="selectPreviousBase()" class="prev-selector">&#9668;</button>
         <button v-on:click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
@@ -59,6 +62,17 @@ export default {
       selectedRightArmIndex: 0,
       selectedBaseIndex: 0,
     };
+  },
+  computed: {
+    selectedRobot() {
+      return {
+        head: availableParts.heads[this.selectedHeadIndex],
+        leftArm: availableParts.arms[this.selectedLeftArmIndex],
+        torso: availableParts.torsos[this.selectedTorsoIndex],
+        rightArm: availableParts.arms[this.selectedRightArmIndex],
+        base: availableParts.base[this.selectedBaseIndex],
+      };
+    },
   },
   methods: {
     selectNextHead() {
@@ -206,5 +220,12 @@ export default {
 }
 .right .next-selector {
   right: -3px;
+}
+.robot-name {
+    position: absolute;
+    top: -25px;
+    text-align: center;
+    width: 100%;
+
 }
 </style>
