@@ -23,8 +23,9 @@
       position="right"/>
     </div>
     <div class="bottom-row">
-      <PartSelector :parts="availableParts.bases"
-      position="bottom"/>
+      <PartSelector
+        :parts="availableParts.bases"
+        position="bottom"/>
     </div>
     <div>
         <h1>Cart</h1>
@@ -92,7 +93,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .part {
   position: relative;
   width:165px;
