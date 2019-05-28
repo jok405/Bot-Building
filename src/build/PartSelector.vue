@@ -50,7 +50,13 @@ export default {
   },
   methods: {
     showPartInfo() {
-
+      this.$router.push({
+        name: 'Parts',
+        params: {
+          id: this.selectedPart.id,
+          partType: this.selectedPart.type,
+        },
+      });
     },
     emitSelectedPart() {
       this.$emit('partSelected', this.selectedPart);
@@ -97,6 +103,7 @@ export default {
 }
 .part img {
   width:165px;
+  cursor: pointer;
 }
 .top {
   border-bottom: none;
