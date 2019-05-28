@@ -11,12 +11,13 @@
             <img :src="selectedRobot.torso.src"/>
             <img :src="selectedRobot.rightArm.src" class="rotate-right"/>
           </div>
-      </CollapsibleSection>
+
         <div class="bottom-row">
           <img :src="selectedRobot.base.src"/>
         </div>
       </div>
-            <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
+        </CollapsibleSection>
+      <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     </div>
 
     <div class="top-row">
