@@ -1,5 +1,5 @@
 <template>
-  <div class="part" :class="positon" >
+  <div class="part" :class="position" >
     <img :src="selectedPart.src" title="arm"/>
     <button @click="selectPreviousPart()" class="prev-selector"></button>
     <button @click="selectNextPart()" class="next-selector"></button>
@@ -21,21 +21,19 @@ function getNextValidIndex(index, length) {
 
 // likely where the child components are not syncing with the parent component
 export default {
-  props: ['parts', 'position'],
-
-  //   props: {
-  //     parts: {
-  //       type: Array,
-  //       required: true,
-  //       validator(value) {
-  //         return ['left', 'right', 'top', 'bottom', 'center'].includes(value);
-  //       },
-  //     },
-  //     position: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //   },
+  props: {
+    parts: {
+      type: Array,
+      required: true,
+      validator(value) {
+        return ['left', 'right', 'top', 'bottom', 'center'].includes(value);
+      },
+    },
+    position: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return { selectedPartIndex: 0 };
   },
