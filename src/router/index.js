@@ -4,6 +4,11 @@ import HomePage from '../home/HomePage.vue';
 import RobotBuilder from '../build/RobotBuilder.vue';
 import PartInfo from '../parts/PartInfo.vue';
 import BrowseParts from '../parts/BrowseParts.vue';
+import RobotHeads from '../parts/RobotHeads.vue';
+import RobotArms from '../parts/RobotArms.vue';
+import RobotTorsos from '../parts/RobotTorsos.vue';
+import RobotBases from '../parts/RobotBases.vue';
+
 
 Vue.use(Router);
 
