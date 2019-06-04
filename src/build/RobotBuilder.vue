@@ -55,7 +55,6 @@
 </template>
 
 <script>
-
 import createdHookMixin from './created-hook-mixin';
 import PartSelector from './PartSelector.vue';
 import CollapsibleSection from '../shared/CollapsibleSection.vue';
@@ -65,6 +64,7 @@ export default {
   created() {
     this.$store.dispatch('getParts');
   },
+
   components: { PartSelector, CollapsibleSection },
   data() {
     return {
@@ -81,7 +81,7 @@ export default {
   mixins: [createdHookMixin],
   computed: {
     availableParts() {
-      return this.$store.state.parts;
+      return this.$store.state.robots.parts;
     },
     saleBorderClass() {
       return this.selectedRobot.head.onSale ? 'sale-border' : '';
@@ -100,7 +100,7 @@ export default {
             + robot.torso.cost
             + robot.rightArm.cost
             + robot.base.cost;
-      this.$store.commit('addRobotToCart', Object.assign({}, robot, { cost }));
+      this.$store.dispatch('addRobotToCart', Object.assign({}, robot, { cost }));
       this.addedToCart = true;
     },
   },
