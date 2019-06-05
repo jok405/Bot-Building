@@ -4,6 +4,7 @@ export default {
   state: {
     cart: [],
     parts: null,
+    foo: 'robots-foo',
   },
   mutations: {
     addRobotToCart(state, robot) {
