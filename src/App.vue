@@ -1,22 +1,29 @@
 <template>
   <div id="app">
+    <!-- Root Foo: {{rootFoo}} <br/>
+    Robots Foo: {{robotsFoo}} <br/>
+    Users Foo: {{usersFoo}} <br/>
+    <br/>
+    Root Getter Foo: {{rootGetterFoo}} <br/>
+    Robots Getter Foo: {{robotsGetterFoo}} <br/> -->
+
     <header>
       <nav>
         <ul>
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Home'}" exact>
-            <img class="logo" src="./assets/build-a-bot-logo.png"/>
-            Build-a-Bot
+              <img class="logo" src="./assets/build-a-bot-logo.png"/>
+              Build-a-Bot
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Build'}" exact>
-            Build
+              Build
             </router-link>
           </li>
           <li class="nav-item cart">
             <router-link class="nav-link" to="/cart" exact>
-            Cart
+              Cart
             </router-link>
             <div class="cart-items">
               {{cart.length}}
@@ -37,42 +44,45 @@
 </template>
 
 <script>
-// import HomePage from './home/HomePage.vue';
-// import RobotBuilder from './build/RobotBuilder.vue';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'app',
   computed: {
+    ...mapState({
+      rootFoo: 'foo',
+      usersFoo: state => state.users.foo,
+    }),
+    ...mapState('robots', { robotsFoo: 'foo' }),
+    ...mapGetters({ rootGetterFoo: 'foo' }),
+    ...mapGetters('robots', { robotsGetterFoo: 'foo' }),
     cart() {
       return this.$store.state.robots.cart;
     },
   },
-
 };
 </script>
 
 <style>
 body {
   background: linear-gradient(to bottom, #555, #999);
-  background-attachment:fixed;
+  background-attachment: fixed;
 }
 </style>
 
 <style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-
 }
 main {
-  padding: 30 px;
+  padding: 30px;
   background-color: white;
   width: 964px;
   min-height: 300px;
 }
-
 header {
   background-color: #999;
-  width: 11s84px;
+  width: 1184px;
   margin: 0 auto;
 }
 ul {

@@ -1,7 +1,7 @@
 <template>
-    <div class="sidebar">
-        Standard Sidebar
-    </div>
+  <div class="sidebar">
+    Standard Sidebar
+  </div>
 </template>
 
 <script>
@@ -11,8 +11,8 @@ export default {
 </script>
 
 <style scoped>
-    .sidebar {
-        font-size: 50px;
-        transform: rotate(90deg);
-    }
+  .sidebar {
+    font-size: 50px;
+    transform: rotate(90deg);
+  }
 </style>

@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <div>
-            <h1>{{ part.title }}</h1>
-        </div>
-        <div>
-            {{part.description}}
-        </div>
+  <div>
+    <h1>{{ part.title }}</h1>
+    <div >
+      {{part.description}}
     </div>
+  </div>
 </template>
 
 <script>

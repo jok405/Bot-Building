@@ -11,21 +11,18 @@
             <img :src="selectedRobot.torso.src"/>
             <img :src="selectedRobot.rightArm.src" class="rotate-right"/>
           </div>
-
-        <div class="bottom-row">
-          <img :src="selectedRobot.base.src"/>
+          <div class="bottom-row">
+            <img :src="selectedRobot.base.src"/>
+          </div>
         </div>
-      </div>
       </CollapsibleSection>
       <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     </div>
-
     <div class="top-row">
-      <!-- <div :class="[saleBorderClass, 'top', 'part']">
-          <div class="robot-name">
-              {{selectedRobot.head.title}}
-              <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
-          </div> -->
+        <!-- <div class="robot-name">
+          {{selectedRobot.head.title}}
+          <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
+        </div> -->
         <PartSelector
           :parts="availableParts.heads"
           position="top"
@@ -33,17 +30,17 @@
     </div>
     <div class="middle-row">
       <PartSelector
-      :parts="availableParts.arms"
-      position ="left"
-      @partSelected="part => selectedRobot.leftArm=part"/>
+        :parts="availableParts.arms"
+        position="left"
+        @partSelected="part => selectedRobot.leftArm=part"/>
       <PartSelector
-      :parts="availableParts.torsos"
-      position="center"
-      @partSelected="part => selectedRobot.torso=part"/>
+        :parts="availableParts.torsos"
+        position="center"
+        @partSelected="part => selectedRobot.torso=part"/>
       <PartSelector
-      :parts="availableParts.arms"
-      position="right"
-      @partSelected="part => selectedRobot.rightArm=part"/>
+        :parts="availableParts.arms"
+        position="right"
+        @partSelected="part => selectedRobot.rightArm=part"/>
     </div>
     <div class="bottom-row">
       <PartSelector
@@ -55,6 +52,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import createdHookMixin from './created-hook-mixin';
 import PartSelector from './PartSelector.vue';
 import CollapsibleSection from '../shared/CollapsibleSection.vue';
@@ -62,12 +61,22 @@ import CollapsibleSection from '../shared/CollapsibleSection.vue';
 export default {
   name: 'RobotBuilder',
   created() {
-    this.$store.dispatch('getParts');
+    this.getParts();
   },
-
+  beforeRouteLeave(to, from, next) {
+    if (this.addedToCart) {
+      next(true);
+    } else {
+      /* eslint no-alert: 0 */
+      /* eslint no-restricted-globals: 0 */
+      const response = confirm('You have not added your robot to your cart, are you sure you want to leave?');
+      next(response);
+    }
+  },
   components: { PartSelector, CollapsibleSection },
   data() {
     return {
+      addedToCart: false,
       cart: [],
       selectedRobot: {
         head: {},
@@ -88,19 +97,23 @@ export default {
     },
     headBorderStyle() {
       return {
-        border: this.selectedRobot.head.onSale ? '3px solid red' : '3px solid #aaa',
+        border: this.selectedRobot.head.onSale ?
+          '3px solid red' :
+          '3px solid #aaa',
       };
     },
   },
   methods: {
+    ...mapActions('robots', ['getParts', 'addRobotToCart']),
     addToCart() {
       const robot = this.selectedRobot;
-      const cost = robot.head.cost
-            + robot.leftArm.cost
-            + robot.torso.cost
-            + robot.rightArm.cost
-            + robot.base.cost;
-      this.$store.dispatch('addRobotToCart', Object.assign({}, robot, { cost }));
+      const cost = robot.head.cost +
+        robot.leftArm.cost +
+        robot.torso.cost +
+        robot.rightArm.cost +
+        robot.base.cost;
+      this.addRobotToCart(Object.assign({}, robot, { cost }))
+        .then(() => this.$router.push('/cart'));
       this.addedToCart = true;
     },
   },
@@ -114,8 +127,10 @@ export default {
   height:165px;
   border: 3px solid #aaa;
 }
-.part img {
-  width:165px;
+.part {
+  img {
+    width:165px;
+  }
 }
 .top-row {
   display:flex;
@@ -197,23 +212,22 @@ export default {
   right: -3px;
 }
 .robot-name {
-    position: absolute;
-    top: -25px;
-    text-align: center;
-    width: 100%;
-
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
 }
 .sale {
-    color: red;
+  color: red;
 }
 .content {
-    position: relative;
+  position: relative;
 }
 .add-to-cart {
-    position: absolute;
-    width: 210px;
-    padding: 3px;
-    font-size: 16px;
+  position: absolute;
+  width: 210px;
+  padding: 3px;
+  font-size: 16px;
 }
 .sale-border {
   border: 3px solid red;

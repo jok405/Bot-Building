@@ -3,3 +3,4 @@ export default {
     console.log('component created');
   },
 };
+

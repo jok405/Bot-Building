@@ -1,9 +1,19 @@
 <template>
   <div class="part" :class="position" >
-    <img @click="showPartInfo()" :src="selectedPart.src" title="arm"/>
+    <router-link :to="{
+        name: 'Parts',
+        params: {
+          id: this.selectedPart.id,
+          partType: this.selectedPart.type,
+        }}">
+      <img :src="selectedPart.src" title="arm"/>
+    </router-link>
     <button @click="selectPreviousPart()" class="prev-selector"></button>
     <button @click="selectNextPart()" class="next-selector"></button>
-    <span class="sale" v-show="selectedPart.onSale">Sale!</span>
+    <span
+      @click="pinPadding='30px'"
+      v-pin="{ bottom: pinPadding, right: pinPadding}"
+      class="sale" v-show="selectedPart.onSale">Sale!</span>
   </div>
 </template>
 
@@ -18,24 +28,25 @@ function getNextValidIndex(index, length) {
   return incrementedIndex > length - 1 ? 0 : incrementedIndex;
 }
 
-
-// likely where the child components are not syncing with the parent component
 export default {
   props: {
     parts: {
       type: Array,
       required: true,
-      validator(value) {
-        return ['left', 'right', 'top', 'bottom', 'center'].includes(value);
-      },
     },
     position: {
       type: String,
       required: true,
+      validator(value) {
+        return ['left', 'right', 'top', 'bottom', 'center'].includes(value);
+      },
     },
   },
   data() {
-    return { selectedPartIndex: 0 };
+    return {
+      selectedPartIndex: 0,
+      pinPadding: '10px',
+    };
   },
   computed: {
     selectedPart() {
@@ -49,15 +60,6 @@ export default {
     this.emitSelectedPart();
   },
   methods: {
-    showPartInfo() {
-      this.$router.push({
-        name: 'Parts',
-        params: {
-          id: this.selectedPart.id,
-          partType: this.selectedPart.type,
-        },
-      });
-    },
     emitSelectedPart() {
       this.$emit('partSelected', this.selectedPart);
     },
@@ -73,8 +75,10 @@ export default {
         this.parts.length,
       );
     },
+
   },
 };
+
 </script>
 
 <style scoped>
@@ -85,9 +89,6 @@ export default {
   border: 3px solid #aaa;
 }
 .sale {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
   color: white;
   background-color: red;
   padding: 3px;

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import HomePage from '../home/HomePage.vue';
 import RobotBuilder from '../build/RobotBuilder.vue';
 import PartInfo from '../parts/PartInfo.vue';
@@ -11,7 +12,6 @@ import RobotBases from '../parts/RobotBases.vue';
 import SidebarStandard from '../sidebars/SidebarStandard.vue';
 import SidebarBuild from '../sidebars/SidebarBuild.vue';
 import ShoppingCart from '../cart/ShoppingCart.vue';
-
 
 Vue.use(Router);
 
@@ -27,8 +27,10 @@ export default new Router({
   }, {
     path: '/build',
     name: 'Build',
-    component: RobotBuilder,
-    sidebar: SidebarBuild,
+    components: {
+      default: RobotBuilder,
+      sidebar: SidebarBuild,
+    },
   }, {
     path: '/parts/browse',
     name: 'BrowseParts',
@@ -45,7 +47,7 @@ export default new Router({
         component: RobotArms,
       }, {
         name: 'BrowseTorsos',
-        path: 'torsos',
+        path: 'toros',
         component: RobotTorsos,
       }, {
         name: 'BrowseBases',
